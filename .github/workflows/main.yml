@@ -1,0 +1,63 @@
+# Copyright 2020-2021 The Khronos Group, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+name: CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  build-mobile:
+    name: "Build ${{ matrix.sdk }}"
+    strategy:
+      matrix:
+        include:
+          - platform: android
+            sdk: android
+            architectures: arm64-v8a
+    env:
+      PARALLEL: -j 2
+
+    runs-on: ubuntu-latest  # Use only Ubuntu for Android build
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Cache glslang / SPIRV-Tools
+        id: cache-externals
+        uses: actions/cache@main
+        with:
+          path: external/*-build/output
+          key: ${{ matrix.platform }} externals ${{ hashFiles('checkout_glslang_spirv_tools.sh', 'build_glslang_spirv_tools.sh') }}
+
+      - name: Pull glslang / SPIRV-Tools
+        if: steps.cache-externals.outputs.cache-hit != 'true'
+        shell: bash
+        working-directory: ${{github.workspace}}
+        run: ./checkout_glslang_spirv_tools.sh
+
+      - name: Build glslang / SPIRV-Tools
+        if: steps.cache-externals.outputs.cache-hit != 'true'
+        shell: bash
+        working-directory: ${{github.workspace}}
+        run: ./build_glslang_spirv_tools.sh Release 4
+
+      - name: Configure
+        shell: bash
+        run: |
+          cd physx
+          ./generate_projects.sh jni-android-arm64-v8a
+          cmake ./compiler/jni-android-arm64-v8a-release -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_LATEST_HOME/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24 -DANDROID_LD=lld
+
+      - name: Build SPIRV-Cross for Android ARM64
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        run: |
+          cmake --build ./compiler/jni-android-arm64-v8a-release/ --config Release --parallel 4
+          cmake --build ./compiler/jni-android-arm64-v8a-release/ --config Release --target install
+
+      - uses: actions/upload-artifact@main
+        with:
+          name: android-arm64
+          path: build/output
