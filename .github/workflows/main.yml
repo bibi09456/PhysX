@@ -18,25 +18,19 @@ jobs:
             sdk: android
             architectures: arm64-v8a
     env:
-      PARALLEL: -j 2
+      PARALLEL: -j 4
 
     runs-on: ubuntu-latest  # Use only Ubuntu for Android build
     steps:
       - uses: actions/checkout@main
 
-      - name: Configure
-        shell: bash
-        run: |
-          cd physx
-          ./generate_projects.sh jni-android-arm64-v8a
-          cmake ./compiler/jni-android-arm64-v8a-release -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_LATEST_HOME/build/cmake/android.toolchain.cmake  -DCMAKE_INSTALL_PREFIX=output -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24 -DANDROID_LD=lld
-
       - name: Build for Android ARM64
         shell: bash
-        working-directory: ${{github.workspace}}/physx
         run: |
-          cmake --build ./compiler/jni-android-arm64-v8a-release/ --config Release --parallel 4
-          cmake --build ./compiler/jni-android-arm64-v8a-release/ --config Release --target install
+          cd ./physx
+          ./generate_projects.sh jni-android-arm64-v8a
+          cmake ./compiler/jni-android-arm64-v8a-release/ -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_LATEST_HOME/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24 -DANDROID_LD=lld
+          cmake --build ./compiler/jni-android-arm64-v8a-release/ --parallel 4
 
       - uses: actions/upload-artifact@main
         with:
