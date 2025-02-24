@@ -31,6 +31,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -fPIC -DPIC -flto=thin -fwhole-program-v
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fPIC -DPIC -flto=thin -fwhole-program-vtables -mllvm -polly -pthread -Wall -fno-emulated-tls -march=armv8-a+simd+crc+crypto+fp16 -mcpu=cortex-a76 -fdata-sections -ffunction-sections -fmerge-all-constants -DNDEBUG")
 set(LINK_OPTIONS "${CMAKE_LINK_OPTIONS} -fuse-ld=lld -flto=thin -Wl,-plugin-opt=-emulated-tls=0")
 set(LINK_FLAGS "${CMAKE_LINK_FLAGS} -fuse-ld=lld -flto=thin -Wl,-plugin-opt=-emulated-tls=0")
+set(CMAKE_ANDROID_STL_TYPE system)
 
 STRING(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_LOWERCASE)
 
