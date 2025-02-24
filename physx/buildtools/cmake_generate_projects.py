@@ -266,7 +266,6 @@ class CMakePreset:
                 outString = outString + ' -DCMAKE_TOOLCHAIN_FILE=' + \
                     os.environ['ANDROID_NDK_HOME'] + \
                     '/build/cmake/android.toolchain.cmake'
-                outString = outString + ' -DANDROID_STL=\"system\"'
                 outString = outString + ' -DCM_ANDROID_FP=\"softfp\"'
                 outString = outString + ' -DANDROID_NDK=' + \
                     os.environ['ANDROID_NDK_HOME']
