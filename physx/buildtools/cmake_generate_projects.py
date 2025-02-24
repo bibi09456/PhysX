@@ -272,7 +272,6 @@ class CMakePreset:
                 outString = outString + ' -DCMAKE_MAKE_PROGRAM=\"' + \
                     os.environ['ANDROID_NDK_HOME'] + '/prebuilt/linux-x86_64/bin/make\"'
                 outString = outString + ' -DANDROID_PLATFORM=\"android-29\"'
-                outString = outString + ' -DANDROID_LD=\"lld\"'
             return outString
         elif self.targetPlatform == 'emscripten':
             outString = outString + ' -DTARGET_BUILD_PLATFORM=emscripten'
