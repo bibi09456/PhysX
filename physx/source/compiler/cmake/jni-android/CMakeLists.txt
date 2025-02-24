@@ -32,6 +32,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fPIC -DPIC -flto=thin -fwhole-progr
 set(LINK_OPTIONS "${CMAKE_LINK_OPTIONS} -fuse-ld=lld -flto=thin -Wl,-plugin-opt=-emulated-tls=0")
 set(LINK_FLAGS "${CMAKE_LINK_FLAGS} -fuse-ld=lld -flto=thin -Wl,-plugin-opt=-emulated-tls=0")
 set(CMAKE_ANDROID_STL_TYPE system)
+set(CMAKE_ANDROID_LD "lld")
 
 STRING(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_LOWERCASE)
 
