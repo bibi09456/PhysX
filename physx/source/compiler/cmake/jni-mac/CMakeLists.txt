@@ -22,7 +22,7 @@
 ## (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 ## OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ##
-## Copyright (c) 2008-2024 NVIDIA Corporation. All rights reserved.
+## Copyright (c) 2008-2025 NVIDIA Corporation. All rights reserved.
 
 IF(PX_OUTPUT_ARCH STREQUAL "arm")
     SET(OSX_BITNESS "-arch arm64")
@@ -88,6 +88,9 @@ SET(PHYSX_CXX_FLAGS "${OSX_BITNESS} ${ARCH_SIMD_FLAG} -std=c++11 -fno-rtti -fno-
     -Wno-inconsistent-missing-override \
     -Wno-inconsistent-missing-destructor-override \
     -Wno-unused-function \
+    -Wno-missing-include-dirs \
+    -Wno-switch-default \
+    -Wno-format \
 " CACHE INTERNAL "PhysX CXX")
 
 SET(CMAKE_SHARED_LINKER_FLAGS_CHECKED "")
@@ -139,7 +142,6 @@ INCLUDE(PhysXCommon.cmake)
 INCLUDE(PhysXCooking.cmake)
 INCLUDE(PhysXExtensions.cmake)
 INCLUDE(PhysXVehicle.cmake)
-INCLUDE(PhysXVehicle2.cmake)
 INCLUDE(SceneQuery.cmake)
 INCLUDE(SimulationController.cmake)
 INCLUDE(PhysXPvdSDK.cmake)
@@ -152,7 +154,6 @@ SET_PROPERTY(TARGET PhysXCharacterKinematic PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET PhysXCommon PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET PhysXCooking PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET PhysXExtensions PROPERTY FOLDER "PhysX SDK")
-SET_PROPERTY(TARGET PhysXVehicle PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET PhysXVehicle2 PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET LowLevel PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET LowLevelAABB PROPERTY FOLDER "PhysX SDK")

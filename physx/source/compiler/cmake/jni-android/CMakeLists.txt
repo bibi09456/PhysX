@@ -22,7 +22,7 @@
 ## (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 ## OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ##
-## Copyright (c) 2008-2022 NVIDIA Corporation. All rights reserved.
+## Copyright (c) 2008-2025 NVIDIA Corporation. All rights reserved.
 
 # We define the CXX flags for this CMakeLists and all others that are included afterwards. This is a GLOBAL setting. 
 # If/when the solutions go standalone (say, samples and visual tests) - those CMakeLists will need to be fixed.
@@ -117,7 +117,6 @@ INCLUDE(PhysXCommon.cmake)
 INCLUDE(PhysXCooking.cmake)
 INCLUDE(PhysXExtensions.cmake)
 INCLUDE(PhysXVehicle.cmake)
-INCLUDE(PhysXVehicle2.cmake)
 INCLUDE(SceneQuery.cmake)
 INCLUDE(SimulationController.cmake)
 INCLUDE(PhysXPvdSDK.cmake)
@@ -130,7 +129,6 @@ SET_PROPERTY(TARGET PhysXCharacterKinematic PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET PhysXCommon PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET PhysXCooking PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET PhysXExtensions PROPERTY FOLDER "PhysX SDK")
-SET_PROPERTY(TARGET PhysXVehicle PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET PhysXVehicle2 PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET LowLevel PROPERTY FOLDER "PhysX SDK")
 SET_PROPERTY(TARGET LowLevelAABB PROPERTY FOLDER "PhysX SDK")
