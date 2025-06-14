@@ -28,7 +28,7 @@ cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_C_FLAGS "-O3 -fPIC -DPIC -flto=thin -fwhole-program-vtables -mllvm -polly -pthread -Wall -fno-emulated-tls -march=armv8-a+simd+crc+crypto+fp16 -mcpu=cortex-a76 -fdata-sections -ffunction-sections -fmerge-all-constants -DNDEBUG")
 set(CMAKE_CXX_FLAGS "-O3 -fPIC -DPIC -flto=thin -fwhole-program-vtables -mllvm -polly -pthread -Wall -fno-emulated-tls -march=armv8-a+simd+crc+crypto+fp16 -mcpu=cortex-a76 -fdata-sections -ffunction-sections -fmerge-all-constants -DNDEBUG")
-set(LINK_OPTIONS "-fuse-ld=lld -flto=thin -Wl,-plugin-opt=-emulated-tls=0")
+set(LINK_FLAGS "-fuse-ld=lld -flto=thin -Wl,-plugin-opt=-emulated-tls=0")
 
 IF(NOT DEFINED PHYSX_CMAKE_MODULES_PATH OR PHYSX_CMAKE_MODULES_PATH STREQUAL "")
 	IF(DEFINED ENV{PM_cmake_PATH} AND NOT "$ENV{PM_cmake_PATH}" STREQUAL "")
