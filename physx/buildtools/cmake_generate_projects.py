@@ -313,7 +313,7 @@ class CMakePreset:
                     os.environ['ANDROID_NDK_HOME'] + \
                     '/build/cmake/android.toolchain.cmake'
                 outString = outString + ' -DANDROID_STL=\"c++_static\"'
-                outString = outString + ' -DCM_ANDROID_FP=\"softfp\"'
+                outString = outString + ' -DCM_ANDROID_FP=\"hard\"'
                 outString = outString + ' -DANDROID_NDK=' + \
                     os.environ['ANDROID_NDK_HOME']
                 outString = outString + ' -DCMAKE_MAKE_PROGRAM=\"' + \
