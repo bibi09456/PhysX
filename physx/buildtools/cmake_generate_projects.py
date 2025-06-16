@@ -384,7 +384,7 @@ def presetProvided(pName, physx_root_dir):
                   physx_root_dir + '/compiler/' + cmakeMasterDir + '\"' + cmakeParams)
         os.chdir(physx_root_dir)
     else:
-        configs = ['debug', 'checked', 'profile', 'release']
+        configs = ['release']
         for config in configs:
             # cleanup and create output directory
             outputDir = os.path.join(physx_root_dir, 'compiler', parsedPreset.presetName + '-' + config)
@@ -395,7 +395,7 @@ def presetProvided(pName, physx_root_dir):
             os.chdir(outputDir)
             # print(cmakeExec + ' \"' + physx_root_dir + '/compiler/' + cmakeMasterDir + '\"' + cmakeParams + ' -DCMAKE_BUILD_TYPE=' + config)
             os.system(cmakeExec + ' \"' + physx_root_dir + '/compiler/' +
-                      cmakeMasterDir + '\"' + cmakeParams + ' -DCMAKE_BUILD_TYPE=' + config)
+                      cmakeMasterDir + '\"' + cmakeParams + ' -DCMAKE_BUILD_TYPE=RelWithDebInfo')
             os.chdir(physx_root_dir)
     pass
 
