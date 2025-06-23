@@ -8,6 +8,7 @@
 
 #include "PhysXJniGlue.h"
 
+/*
 #if PX_ANDROID
 #include <signal.h>
 extern "C" {
@@ -26,5 +27,6 @@ __attribute__((constructor)) void setup_profile_handler(void) {
     printf("Profile handler set up\n");
 }
 #endif
+*/
 
 // nothing else to do here, the magic happens inside PhysXJniGlue.h
