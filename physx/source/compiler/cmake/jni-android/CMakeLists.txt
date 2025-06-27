@@ -27,12 +27,6 @@
 # We define the CXX flags for this CMakeLists and all others that are included afterwards. This is a GLOBAL setting. 
 # If/when the solutions go standalone (say, samples and visual tests) - those CMakeLists will need to be fixed.
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -flto=thin -mllvm=-polly -mllvm=-polly-vectorizer=stripmine -mllvm=-polly-omp-backend=LLVM -mllvm=-polly-parallel -mllvm=-polly-num-threads=0 -mllvm=-polly-scheduling=dynamic -mcpu=cortex-a73 -fwhole-program-vtables -pipe -fprofile-use=${CMAKE_CURRENT_LIST_DIR}/physx_pgo_profile_data_android.profdata")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -flto=thin -mllvm=-polly -mllvm=-polly-vectorizer=stripmine -mllvm=-polly-omp-backend=LLVM -mllvm=-polly-parallel -mllvm=-polly-num-threads=0 -mllvm=-polly-scheduling=dynamic -mcpu=cortex-a73 -fwhole-program-vtables -pipe -fprofile-use=${CMAKE_CURRENT_LIST_DIR}/physx_pgo_profile_data_android.profdata")
-set(LINK_OPTIONS "${CMAKE_LINK_OPTIONS} -fuse-ld=lld -flto=thin")
-set(LINK_FLAGS "${CMAKE_LINK_FLAGS} -fuse-ld=lld -flto=thin")
-set(CMAKE_ANDROID_LD "lld")
-
 STRING(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_LOWERCASE)
 
 SET(PHYSX_WARNING_DISABLES "-Wno-invalid-offsetof \
@@ -56,7 +50,7 @@ IF(${ANDROID_ABI} STREQUAL "armeabi-v7a")
 ELSEIF(${ANDROID_ABI} STREQUAL "armeabi-v7a with NEON")
 	SET(PHYSX_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wextra -Wpedantic -std=c++11 -fno-rtti -fno-exceptions -ffunction-sections -funwind-tables -fomit-frame-pointer -funswitch-loops -finline-limit=300 -fno-strict-aliasing -fstack-protector ${PHYSX_WARNING_DISABLES}" CACHE INTERNAL "PhysX CXX")
 ELSEIF(${ANDROID_ABI} STREQUAL "arm64-v8a")
-	SET(PHYSX_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -std=c++17 -fno-rtti -fno-exceptions -ffunction-sections -fdata-sections -O2 -mllvm=-polly -mllvm=-polly-vectorizer=stripmine -mllvm=-polly-omp-backend=LLVM -mllvm=-polly-parallel -mllvm=-polly-num-threads=0 -mllvm=-polly-scheduling=dynamic -mcpu=cortex-a73 -fwhole-program-vtables -pipe -fprofile-use=${CMAKE_CURRENT_LIST_DIR}/physx_pgo_profile_data_android.profdata ${PHYSX_WARNING_DISABLES} " CACHE INTERNAL "PhysX CXX")
+	SET(PHYSX_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -std=c++17 -fno-rtti -fno-exceptions -ffunction-sections -fdata-sections -Ofast -flto=thin -mllvm=-polly -mllvm=-polly-vectorizer=stripmine -mllvm=-polly-omp-backend=LLVM -mllvm=-polly-parallel -mllvm=-polly-num-threads=0 -mllvm=-polly-scheduling=dynamic -mcpu=cortex-a73 -fwhole-program-vtables -fforce-emit-vtables -fstrict-vtable-pointers -pipe -fprofile-use=${CMAKE_CURRENT_LIST_DIR}/physx_pgo_profile_data_android.profdata ${PHYSX_WARNING_DISABLES} " CACHE INTERNAL "PhysX CXX")
 ELSEIF(${ANDROID_ABI} STREQUAL "x86")
 	SET(PHYSX_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wextra -Wpedantic -std=c++11 -fno-rtti -fno-exceptions -ffunction-sections -fdata-sections ${PHYSX_WARNING_DISABLES} -fpack-struct=8 -malign-double " CACHE INTERNAL "PhysX CXX")
 ELSEIF(${ANDROID_ABI} STREQUAL "x86_64")
@@ -65,9 +59,9 @@ ENDIF()
 
 # Build debug info for all configurations
 SET(PHYSX_CXX_FLAGS_DEBUG "-O0 -g" CACHE INTERNAL "PhysX Debug CXX Flags")
-SET(PHYSX_CXX_FLAGS_CHECKED "-O2 -g" CACHE INTERNAL "PhysX Checked CXX Flags")
-SET(PHYSX_CXX_FLAGS_PROFILE "-O2 -g" CACHE INTERNAL "PhysX Profile CXX Flags")
-SET(PHYSX_CXX_FLAGS_RELEASE "-O2 -g" CACHE INTERNAL "PhysX Release CXX Flags")
+SET(PHYSX_CXX_FLAGS_CHECKED "-Ofast" CACHE INTERNAL "PhysX Checked CXX Flags")
+SET(PHYSX_CXX_FLAGS_PROFILE "-Ofast" CACHE INTERNAL "PhysX Profile CXX Flags")
+SET(PHYSX_CXX_FLAGS_RELEASE "-Ofast" CACHE INTERNAL "PhysX Release CXX Flags")
 
 # These flags are local to the directory the CMakeLists.txt is in, so don't get carried over to OTHER CMakeLists.txt (thus the CACHE variables above)
 SET(CMAKE_CXX_FLAGS ${PHYSX_CXX_FLAGS})
