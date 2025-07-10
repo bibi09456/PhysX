@@ -29,6 +29,4 @@ __attribute__((constructor)) void setup_profile_handler(void) {
 #endif
 */
 
-void _init(void) { }
-
 // nothing else to do here, the magic happens inside PhysXJniGlue.h
