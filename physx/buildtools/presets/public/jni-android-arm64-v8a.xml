@@ -8,7 +8,7 @@
   </CMakeSwitches>
   <CMakeParams>
     <cmakeParam name="CMAKE_INSTALL_PREFIX" value="install/android-33/PhysX" comment="Install path relative to PhysX SDK root" />
-    <cmakeParam name="ANDROID_NATIVE_API_LEVEL" value="android-33" comment="Android platform API level" />
+    <cmakeParam name="ANDROID_PLATFORM" value="android-34" comment="Android platform API level" />
     <cmakeParam name="ANDROID_ABI" value="arm64-v8a" comment="Android arm 64 ABI" />
   </CMakeParams>
 </preset>
