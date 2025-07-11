@@ -312,7 +312,7 @@ class CMakePreset:
                 outString = outString + ' -DCMAKE_TOOLCHAIN_FILE=' + \
                     os.environ['ANDROID_NDK_HOME'] + \
                     '/build/cmake/android.toolchain.cmake'
-                outString = outString + ' -DCMAKE_SHARED_LINKER_FLAGS=\"-fuse-ld=lld -Wl,-q -Wl,--strip-debug -Wl,--init=_init\"'
+                outString = outString + ' -DCMAKE_SHARED_LINKER_FLAGS=\"-fuse-ld=lld -Wl,-q -Wl,--strip-debug -Wl,--undefined=_dummy_init_impl -Wl,--init=_dummy_init_impl\"'
                 outString = outString + ' -DCMAKE_VERBOSE_MAKEFILE=\"ON\"'
                 outString = outString + ' -DANDROID_STL=\"c++_static\"'
                 outString = outString + ' -DCM_ANDROID_FP=\"hard\"'
