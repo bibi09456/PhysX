@@ -57,7 +57,6 @@ SET(PHYSXFOUNDATION_PLATFORM_SOURCE
 	${LL_SOURCE_DIR}/unix/FdUnixSync.cpp
 	${LL_SOURCE_DIR}/unix/FdUnixThread.cpp
 	${LL_SOURCE_DIR}/unix/FdUnixTime.cpp
-	${LL_SOURCE_DIR}/unix/init.cpp
 	${ANDROID_NDK}/sources/android/cpufeatures/cpu-features.c 
 )
 SOURCE_GROUP("src\\src\\unix" FILES ${PHYSXFOUNDATION_PLATFORM_SOURCE})
